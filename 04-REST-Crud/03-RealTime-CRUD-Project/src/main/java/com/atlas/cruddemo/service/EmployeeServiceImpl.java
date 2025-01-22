@@ -3,6 +3,7 @@ package com.atlas.cruddemo.service;
 import com.atlas.cruddemo.dao.EmployeeDAO;
 import com.atlas.cruddemo.dao.EmployeeDAOImpl;
 import com.atlas.cruddemo.entity.Employee;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,22 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public List<Employee> findAll() {
         return employeeDAO.findAll();
+    }
+
+    @Override
+    public Employee findById(int theId) {
+        return employeeDAO.findById(theId);
+    }
+
+    @Override
+    @Transactional
+    public Employee save(Employee theEmployee) {
+        return employeeDAO.save(theEmployee);
+    }
+
+    @Override
+    @Transactional
+    public void delete(int theId) {
+        employeeDAO.delete(theId);
     }
 }

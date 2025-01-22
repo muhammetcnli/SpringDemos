@@ -1,7 +1,6 @@
 package com.atlas.cruddemo.rest;
 
 
-import com.atlas.cruddemo.dao.EmployeeDAO;
 import com.atlas.cruddemo.entity.Employee;
 import com.atlas.cruddemo.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
