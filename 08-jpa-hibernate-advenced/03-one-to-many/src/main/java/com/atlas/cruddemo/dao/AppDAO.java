@@ -1,7 +1,10 @@
 package com.atlas.cruddemo.dao;
 
+import com.atlas.cruddemo.entity.Course;
 import com.atlas.cruddemo.entity.Instructor;
 import com.atlas.cruddemo.entity.InstructorDetail;
+
+import java.util.List;
 
 public interface AppDAO {
 
@@ -14,4 +17,6 @@ public interface AppDAO {
     InstructorDetail findInstructorDetailById(int theId);
 
     void deleteInstructorDetailById(int theId);
+
+    List<Course> findCoursesByInstructorId(int theId);
 }
