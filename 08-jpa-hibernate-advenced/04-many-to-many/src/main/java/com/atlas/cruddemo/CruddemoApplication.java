@@ -5,6 +5,7 @@ import com.atlas.cruddemo.dao.AppDAOImpl;
 import com.atlas.cruddemo.entity.Course;
 import com.atlas.cruddemo.entity.Instructor;
 import com.atlas.cruddemo.entity.InstructorDetail;
+import com.atlas.cruddemo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,23 +21,51 @@ public class CruddemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AppDAOImpl appDAO){
+	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 
 		return runner -> {
-			// createInstructor(appDAO);
-			// findInstructor(appDAO);
-			// deleteInstructor(appDAO);
-			// findInstructorDetail(appDAO);
-			// deleteInstructorDetail(appDAO);
 
-			// createInstructorWithCourses(appDAO);
-			//findInstructorWithCourses(appDAO);
-			// findCoursesForInstructor(appDAO);
-			//findInstructorWithCoursesJoinFetch(appDAO);
 
-			updateInstructor(appDAO);
+			//createCourseAndStudents(appDAO);
 
+			findCourseAndStudents(appDAO);
 		};
+	}
+
+	private void findCourseAndStudents(AppDAO appDAO) {
+
+		int theId = 10;
+		Course tempCourse = appDAO.findCourseAndStudentsByCourseId(theId);
+
+		System.out.println("Loaded course: " + tempCourse);
+		System.out.println("Students: " + tempCourse.getStudents());
+
+		System.out.println("Done!");
+
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+
+		// create a course
+		Course tempCourse = new Course("Pacman - How to Score One Million Points");
+
+		// create the students
+		Student tempStudent1 = new Student("Muhammet", "Canli", "canli@gmail.com");
+		Student tempStudent2 = new Student("John", "Doe", "canli@gmail.com");
+		// add students to the course
+		tempCourse.addStudent(tempStudent1);
+		tempCourse.addStudent(tempStudent2);
+		//
+
+		System.out.println("Saving the course: " + tempCourse);
+		System.out.println("associated students: " + tempCourse.getStudents());
+
+		appDAO.save(tempCourse);
+
+		System.out.println("Done!");
+
+
+
 	}
 
 	private void updateInstructor(AppDAOImpl appDAO) {

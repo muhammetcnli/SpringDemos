@@ -28,6 +28,12 @@ public class AppDAOImpl implements AppDAO{
     @Transactional
     public void save(Instructor theInstructor) {
         entityManager.persist(theInstructor);
+    }
+
+    @Override
+    @Transactional
+    public void save(Course theCourse) {
+        entityManager.persist(theCourse);
 
     }
 
@@ -102,7 +108,20 @@ public class AppDAOImpl implements AppDAO{
     public void update(Instructor tempInstructor) {
         entityManager.merge(tempInstructor);
 
+    }
 
+    @Override
+    public Course findCourseAndStudentsByCourseId(int theId) {
 
+        TypedQuery<Course> query = entityManager.createQuery(
+                "select c from Course c "
+                        + "JOIN FETCH c.students "
+                        + "where c.id = :data", Course.class
+        );
+        query.setParameter("data", theId);
+
+        Course course = query.getSingleResult();
+
+        return course;
     }
 }

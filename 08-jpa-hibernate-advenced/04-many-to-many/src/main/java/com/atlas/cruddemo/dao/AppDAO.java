@@ -10,6 +10,8 @@ public interface AppDAO {
 
     void save(Instructor theInstructor);
 
+    void save(Course theCourse);
+
     Instructor findInstructorById(int theId);
 
     void deleteInstructorById(int theId);
@@ -23,4 +25,6 @@ public interface AppDAO {
     Instructor findInstructorByIdJoinFetch(int theId);
 
     void update(Instructor tempInstructor);
+
+    Course findCourseAndStudentsByCourseId(int theId);
 }
